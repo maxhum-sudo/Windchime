@@ -1,0 +1,562 @@
+:root {
+  --ink: #12161c;
+  --ink-soft: #1c232c;
+  --moon: #e6edf4;
+  --moon-dim: #b7c4d1;
+  --mist: rgba(180, 200, 220, 0.12);
+  --roof: #5c6773;
+  --gold: #d4b56a;
+  --jade: #4a7a68;
+  --serif-cn: 'Noto Serif SC', 'Songti SC', serif;
+  --serif-deva: 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif;
+  --serif-khmer: 'Noto Serif Khmer', 'Noto Sans Khmer', serif;
+  --serif-en: 'Cormorant Garamond', 'Palatino Linotype', serif;
+  --char-size: clamp(1.05rem, 1.6vw, 1.45rem);
+  --column-gap: clamp(0.85rem, 1.8vw, 1.6rem);
+}
+
+.theme-china {
+  --serif-body: var(--serif-cn);
+}
+
+.theme-india {
+  --ink: #1a120c;
+  --ink-soft: #2a1c14;
+  --moon: #f3e6d4;
+  --moon-dim: #c9b8a0;
+  --mist: rgba(220, 160, 80, 0.1);
+  --gold: #e0a84a;
+  --roof: #c4783a;
+  --serif-body: var(--serif-deva);
+}
+
+.theme-cambodia {
+  --ink: #0f1612;
+  --ink-soft: #1a2420;
+  --moon: #efe6d2;
+  --moon-dim: #b8c4b0;
+  --mist: rgba(80, 140, 100, 0.12);
+  --gold: #d4b06a;
+  --roof: #a85a3a;
+  --serif-body: var(--serif-khmer);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--serif-body, var(--serif-cn));
+  color: var(--moon);
+  background: var(--ink);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+.locale-nav {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.65rem 1.25rem 0.15rem;
+  font-family: var(--serif-en);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.translate-toggle {
+  position: fixed;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.65rem;
+  font-family: var(--serif-en);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--moon-dim);
+  cursor: pointer;
+  user-select: none;
+  background: color-mix(in srgb, var(--ink-soft) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.translate-toggle:hover,
+.translate-toggle:has(input:checked) {
+  color: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 70%, transparent);
+}
+
+.translate-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.switch-track {
+  position: relative;
+  width: 2.5rem;
+  height: 1.3rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--moon) 18%, var(--ink-soft));
+  border: 1px solid color-mix(in srgb, var(--gold) 65%, transparent);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+.switch-track::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.15rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background: var(--moon);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transform: translateY(-50%);
+  transition: transform 0.22s ease, background 0.22s ease;
+}
+
+.translate-toggle:has(input:checked) .switch-track {
+  background: color-mix(in srgb, var(--gold) 70%, var(--ink-soft));
+  border-color: var(--gold);
+}
+
+.translate-toggle:has(input:checked) .switch-track::after {
+  background: var(--ink);
+  transform: translate(1.1rem, -50%);
+}
+
+.translate-toggle:has(input:focus-visible) .switch-track {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.switch-label {
+  line-height: 1;
+}
+
+.locale-nav a {
+  color: var(--moon-dim);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.15rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.locale-nav a:hover,
+.locale-nav a[aria-current='page'] {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.theme-india .atmosphere {
+  background:
+    radial-gradient(ellipse 70% 55% at 78% 10%, rgba(255, 200, 120, 0.14), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 15% 85%, rgba(180, 80, 40, 0.16), transparent 50%),
+    linear-gradient(180deg, #1a120c 0%, #2a1a12 42%, #18100c 100%);
+}
+
+.theme-india .moon {
+  background: radial-gradient(circle at 35% 35%, #fff2d8, #e8c48a 70%, #b88848);
+  box-shadow:
+    0 0 40px rgba(255, 200, 120, 0.28),
+    0 0 100px rgba(220, 140, 60, 0.12);
+}
+
+.theme-cambodia .atmosphere {
+  background:
+    radial-gradient(ellipse 70% 55% at 70% 8%, rgba(220, 200, 140, 0.14), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 20% 85%, rgba(40, 100, 70, 0.2), transparent 50%),
+    linear-gradient(180deg, #0f1612 0%, #1a2820 42%, #121a16 100%);
+}
+
+.theme-cambodia .moon {
+  background: radial-gradient(circle at 35% 35%, #f4efe0, #d4c890 70%, #8a9a70);
+}
+
+.theme-india .poem-line,
+.theme-cambodia .poem-line {
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+}
+
+/* —— Atmosphere —— */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 72% 12%, rgba(220, 230, 240, 0.16), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 20% 80%, rgba(40, 70, 60, 0.18), transparent 50%),
+    linear-gradient(180deg, #0e1218 0%, #171e28 42%, #121820 100%);
+}
+
+.moon {
+  position: absolute;
+  top: 7%;
+  right: 14%;
+  width: min(14vw, 110px);
+  height: min(14vw, 110px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f4f7fa, #c5d0dc 70%, #8a9aab);
+  box-shadow:
+    0 0 40px rgba(220, 230, 240, 0.25),
+    0 0 100px rgba(180, 200, 220, 0.12);
+  animation: moon-breathe 8s ease-in-out infinite;
+}
+
+.mist {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, var(--mist));
+  filter: blur(20px);
+}
+
+.mist-a {
+  animation: mist-drift 18s ease-in-out infinite;
+}
+
+.mist-b {
+  height: 30%;
+  opacity: 0.7;
+  animation: mist-drift 24s ease-in-out infinite reverse;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes moon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+}
+
+@keyframes mist-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3%);
+  }
+}
+
+/* —— Hero / pagoda —— */
+.hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0 2.5rem;
+}
+
+.poem-meta {
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+  /* Tuck ~1in of the title under the roof crest */
+  margin: 0 0 -1in;
+  padding: 0 1rem;
+  opacity: 0.92;
+  transition: filter 0.3s ease;
+}
+
+.poem-meta:hover,
+.poem-meta:focus-within {
+  z-index: 3;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+}
+
+.poem-meta .title {
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.8vw, 1.55rem);
+  margin-left: 0;
+}
+
+.poem-meta .author {
+  color: var(--moon-dim);
+  font-weight: 400;
+}
+
+.brand-block {
+  position: relative;
+  margin: 0 0 0.15rem;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--serif-en);
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--moon);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.tagline {
+  margin: 0.25rem 0 0;
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  color: var(--moon-dim);
+  letter-spacing: 0.06em;
+}
+
+.pagoda-wrap {
+  position: relative;
+  width: 100%;
+  max-width: min(1180px, 98vw);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-inline: auto;
+  isolation: isolate;
+}
+
+.pagoda-roof {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: 50% 100%;
+  animation: eave-sway 7s ease-in-out infinite;
+  flex-shrink: 0;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45));
+  transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+.pagoda-wrap:has(.poem-meta:hover) .pagoda-roof,
+.pagoda-wrap:has(.poem-meta:focus-within) .pagoda-roof {
+  opacity: 0.78;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+}
+
+@keyframes eave-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(0.35deg);
+  }
+}
+
+.poem-field {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  direction: rtl;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: var(--column-gap);
+  margin-top: 0;
+  padding: 0 0.5rem 0.5rem;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.poem-field.cols-ltr {
+  direction: ltr;
+}
+
+.poem-field.is-english {
+  direction: ltr;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0.35rem;
+  max-width: min(720px, 94vw);
+  margin-inline: auto;
+  font-family: var(--serif-en);
+}
+
+.poem-field.is-english .poem-line {
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  direction: ltr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35em 0.55em;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  white-space: normal;
+}
+
+.poem-field.is-english .char.word {
+  display: inline-block;
+}
+
+body.is-english {
+  font-family: var(--serif-en);
+}
+
+body.is-english .poem-meta {
+  font-family: var(--serif-en);
+}
+
+.poem-line {
+  display: block;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  direction: ltr;
+  font-size: var(--char-size);
+  line-height: 1.55;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.poem-line.is-swaying .char {
+  color: color-mix(in srgb, var(--moon) 70%, var(--gold) 30%);
+}
+
+.char {
+  display: inline-block;
+  position: relative;
+  color: var(--moon);
+  will-change: transform;
+  transition: color 0.25s ease;
+  font-weight: 400;
+}
+
+.char.is-near {
+  color: var(--gold);
+}
+
+.hint {
+  margin-top: 1.75rem;
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--moon-dim);
+  opacity: 0.75;
+  transition: opacity 0.6s ease;
+}
+
+.hint.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chime-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  font-family: var(--serif-en);
+  font-size: 0.9rem;
+  color: var(--moon-dim);
+  letter-spacing: 0.04em;
+}
+
+.chime-picker select {
+  appearance: none;
+  background: rgba(28, 35, 44, 0.85);
+  color: var(--moon);
+  border: 1px solid rgba(212, 181, 106, 0.35);
+  border-radius: 2px;
+  padding: 0.35rem 1.75rem 0.35rem 0.7rem;
+  font-family: var(--serif-en);
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+    linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 55%,
+    calc(100% - 9px) 55%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+}
+
+.chime-picker select:focus {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 0.75rem;
+  }
+
+  .pagoda-wrap {
+    max-width: 100vw;
+  }
+
+  .poem-field {
+    margin-top: 0;
+    gap: 0.65rem;
+    padding: 0 0.35rem 0.5rem;
+  }
+
+  .poem-meta {
+    margin-bottom: -0.75in;
+  }
+
+  .poem-line {
+    font-size: 1rem;
+  }
+
+  .brand-block {
+    margin-bottom: 0.15rem;
+  }
+}

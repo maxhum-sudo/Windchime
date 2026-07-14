@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="sa">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windchime · मेघदूतम्</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="theme-india">
+    <nav class="locale-nav" aria-label="Locales">
+      <a href="/">中国</a>
+      <a href="/india.html" aria-current="page">भारत</a>
+      <a href="/cambodia.html">កម្ពុជា</a>
+    </nav>
+
+    <label class="translate-toggle">
+      <input type="checkbox" id="translate-toggle" role="switch" aria-label="Show English translation" />
+      <span class="switch-track" aria-hidden="true"></span>
+      <span class="switch-label">English</span>
+    </label>
+
+    <div class="atmosphere" aria-hidden="true">
+      <div class="moon"></div>
+      <div class="mist mist-a"></div>
+      <div class="mist mist-b"></div>
+      <div class="grain"></div>
+    </div>
+
+    <header class="hero">
+      <div class="brand-block">
+        <p class="brand">Windchime</p>
+        <p class="tagline">Move gently — the verse answers</p>
+      </div>
+
+      <div class="pagoda-wrap">
+        <div class="poem-meta" id="poem-meta"></div>
+
+        <img
+          class="pagoda-roof"
+          src="/roofs/india.webp"
+          alt=""
+          width="1536"
+          height="1001"
+          decoding="async"
+        />
+
+        <div class="poem-field" id="poem-field" aria-label="मेघदूतम्"></div>
+      </div>
+
+      <p class="hint" id="audio-hint">Click or touch once to awaken the chimes</p>
+
+      <label class="chime-picker">
+        <span>Chime</span>
+        <select id="chime-preset" aria-label="Chime preset"></select>
+      </label>
+    </header>
+
+    <script type="module" src="/src/india.js"></script>
+  </body>
+</html>
